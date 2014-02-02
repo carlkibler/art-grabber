@@ -152,12 +152,16 @@ def download_asset(asset, skip_existing=True):
     thumb_path = "assets/getty/thumb/{}.jpg".format(asset['Object ID'])
     if not os.path.exists(image_path):
         outcome, elapsed = download_from_url(image_path, asset['Image URL'])
+    else:
+        log.debug("Skipping asset {}".format(asset["Object ID"]))
+
     if not os.path.exists(thumb_path):
         outcome, elapsed = download_from_url(thumb_path, asset['Thumbnail URL'])
+    else:
+        log.debug("Skipping asset {}".format(asset["Object ID"]))
 
 
 def bulk_download(assets, delay=1.0):
-    import debug
     log.info("Downloading {} assets".format(len(assets)))
     start = time.time()
     for asset in assets:

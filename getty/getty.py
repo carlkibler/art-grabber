@@ -23,7 +23,7 @@ log.addHandler(fh)
 log.addHandler(ch)
 
 
-GETTY_SEARCH_URL =  "http://search.getty.edu/gateway/search?q=&cat=type&types=%22Paintings%22&highlights=%22Open%20Content%20Images%22&rows=5&srt=a&dir=s&dsp=0&img=0&pg=1"
+GETTY_SEARCH_URL =  "http://search.getty.edu/gateway/search?q=&cat=type&types=%22Paintings%22&highlights=%22Open%20Content%20Images%22&rows=1000&srt=a&dir=s&dsp=0&img=0&pg=1"
 GETTY_IMAGE_URL = "http://d2hiq5kf5j4p5h.cloudfront.net/{0:0>6}01.jpg"
 GETTY_THUMBNAIL_URL = "http://www.getty.edu/art/collections/images/thumb/{0:0>6}01-T.JPG"
 "{0:0>6}".format(1)
@@ -164,11 +164,13 @@ def download_asset(asset, skip_existing=True):
 def bulk_download(assets, delay=1.0):
     log.info("Downloading {} assets".format(len(assets)))
     start = time.time()
+    ctr = 1
     for asset in assets:
         download_asset(asset)
         time.sleep(delay)
-        elapsed = time.time()
-        log.info("Bulk download elapsed time {} seconds".format(elapsed))
+        elapsed = time.time() - start
+        log.info("Bulk download elapsed time {} seconds for {} of {} assets".format(elapsed, ctr, len(assets)))
+        ctr += 1
 
 
 if __name__=='__main__':

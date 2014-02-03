@@ -1,6 +1,7 @@
-beautifulsoup4==4.3.2
-debug==0.2.1
-ipython==1.1.0
-readline==6.2.4.1
-requests==2.2.1
-see==1.0.1
+beautifulsoup4
+debug
+ipython
+readline
+requests
+see
+boto
